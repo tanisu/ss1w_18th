@@ -5,15 +5,14 @@ using UnityEngine.InputSystem;
 
 public class player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Vector2 move;
+    public void OnMove(InputAction.CallbackContext context)
     {
-        
+        Debug.Log(context.ReadValue<Vector2>());
+        move = context.ReadValue<Vector2>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(move * Time.deltaTime);
     }
 }
