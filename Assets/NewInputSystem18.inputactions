@@ -263,7 +263,7 @@
                     "name": "",
                     "id": "c361329c-c4ec-42ce-8cfa-930744df59de",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
