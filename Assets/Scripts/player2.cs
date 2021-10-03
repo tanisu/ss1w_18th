@@ -9,12 +9,12 @@ public class player2 : MonoBehaviour
     public Vector2 m_movementValue;
     public float m_fSpeed = 0.01f;//パラメータを受け取るためのVector2と移動速度の変数
 
-    private void OnEnable()
+    public void OnEnable()
 	{
         m_inputMover.Enable();
 	}
 
-    private void OnDisable()
+    public void OnDisable()
     {
         m_inputMover.Disable();
     }
