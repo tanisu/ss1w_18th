@@ -3514,10 +3514,52 @@ MonoBehaviour:
     m_Name: Input Mover
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 17742e86-e693-410b-9b1e-f47bf19e7775
+
+    m_Id: e1e02bc7-b256-4112-842b-a777feb7a9ba
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 6e48dbae-94cb-4441-a174-fc2bf04e00c9
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Mover
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 1d267826-02b9-4d72-a52c-a9fdb00548c5
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Mover
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 7a6112e7-a5d1-4441-812a-21c916b93071
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Mover
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 60267432-a608-42a0-a338-98d6a3dc1c26
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Mover
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 8a88f88d-2b56-45e7-a571-8d44e9be9eb4
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Mover
+      m_Flags: 8
+
   m_movementValue: {x: 0, y: 0}
   m_fSpeed: 0.01
 --- !u!212 &1191953830
