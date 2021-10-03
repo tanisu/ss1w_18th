@@ -10,16 +10,11 @@ public class DummyPlayer : MonoBehaviour
     float x;
     float y;
     float speed = 3f;
-    public enum DIRECTION
-    {
-        STOP,
-        UP,
-        DOWN,
-        RIGHT,
-        LEFT
-    }
+    
 
-    DIRECTION direction = DIRECTION.STOP;
+
+    Direction direction = Direction.STOP;
+    PlayerState playerState = PlayerState.SLEEP;
 
     void Start()
     {
@@ -30,27 +25,39 @@ public class DummyPlayer : MonoBehaviour
     
     void Update()
     {
+        if(GameManager.I.gameState == GameState.GAMEOVER)
+        {
+            direction = Direction.STOP;
+            
+            return;
+        }
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         
+        if(x != 0 || y != 0 && playerState == PlayerState.SLEEP)
+        {
+            Debug.Log("wake");
+            playerState = PlayerState.WAKE;
+            transform.localRotation = new Quaternion(0f,0f,0f,0f);
+        }
         
         if(x == 0 && y == 0)
         {
-            direction = DIRECTION.STOP;
+            direction = Direction.STOP;
         }
         else if( x > 0 && y == 0)
         {
-            direction = DIRECTION.RIGHT;
+            direction = Direction.RIGHT;
         }
         else if(x < 0 && y == 0)
         {
-            direction = DIRECTION.LEFT;
+            direction = Direction.LEFT;
         }else if(y > 0 && x == 0)
         {
-            direction = DIRECTION.UP;
+            direction = Direction.UP;
         }else if(y < 0 && x == 0)
         {
-            direction = DIRECTION.DOWN;
+            direction = Direction.DOWN;
         }
     }
 
@@ -58,23 +65,23 @@ public class DummyPlayer : MonoBehaviour
     {
         switch (direction)
         {
-            case DIRECTION.STOP:
+            case Direction.STOP:
                 rb2d.velocity = new Vector2(0f, 0f);
                 break;
-            case DIRECTION.UP:
+            case Direction.UP:
                 rb2d.velocity = new Vector2(rb2d.velocity.x, speed);
                 animator.SetTrigger("Up");
                 break;
-            case DIRECTION.DOWN:
+            case Direction.DOWN:
                 rb2d.velocity = new Vector2(rb2d.velocity.x, -speed);
                 animator.SetTrigger("Down");
                 break;
-            case DIRECTION.RIGHT:
+            case Direction.RIGHT:
                 transform.localScale = new Vector3(1, 1, 1);
                 rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
                 animator.SetTrigger("Side");
                 break;
-            case DIRECTION.LEFT:
+            case Direction.LEFT:
                 transform.localScale = new Vector3(-1, 1, 1);
                 rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
                 animator.SetTrigger("Side");

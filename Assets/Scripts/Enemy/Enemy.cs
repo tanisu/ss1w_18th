@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     private bool chase;
 
     private bool isChaseing;
+    private bool isMoveing;
     [SerializeField]
     private float chaseSpeed,rangeToChase;
     private Transform target;
@@ -31,12 +32,16 @@ public class Enemy : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         waitCounter = waitTime;
         target = GameObject.FindGameObjectWithTag("DummyPlayer").transform;
-
+        isMoveing = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isMoveing)
+        {
+            return;
+        }
 
         if (!isChaseing)
         {
@@ -100,5 +105,20 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, area.bounds.min.x + 1, area.bounds.max.x - 1),
             Mathf.Clamp(transform.position.y, area.bounds.min.y + 1, area.bounds.max.y - 1), transform.position.z
             );
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("DummyPlayer"))
+        {
+            if (isChaseing)
+            {
+                GameManager.I.ChangeGameState(GameState.GAMEOVER);
+                rb2d.velocity = Vector2.zero;
+                isMoveing = false;
+                Debug.Log("Dead");
+                //restart loop
+            }
+        }
     }
 }
