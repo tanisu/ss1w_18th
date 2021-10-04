@@ -12,6 +12,7 @@ public class MovieManager : MonoBehaviour
     public Image endPanel00;
     public Text startText;
     public Text creditText;
+    public AudioSource audioSource;
 
 
     private void Start()
@@ -21,7 +22,9 @@ public class MovieManager : MonoBehaviour
 
     IEnumerator StartMovie()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
+        audioSource.Play();
+        yield return new WaitForSeconds(3);
         startText.text = ("タニス谷山\nasahi\nくわぽん\npresents");
         yield return new WaitForSeconds(3);
         startText.DOFade(0f, 2f);
@@ -49,7 +52,7 @@ public class MovieManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         panelParent.transform.localPosition = new Vector2(-1000, 0);
         creditText.text = ("SpecialThanks\nスタジオしまづ");
-        creditText.DOFade(0f, 4f);
+        creditText.DOFade(0f, 6f);
         yield return new WaitForSeconds(3);
         panelParent.transform.localPosition = new Vector2(0, 600);
         endPanel00.DOFade(1, 10f);

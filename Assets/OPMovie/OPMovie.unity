@@ -306,7 +306,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: eff7b8c1be16846eaa7fd814afb30208, type: 3}
-    m_FontSize: 0
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -786,7 +786,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 101b020e9896b4957bdf817cdb6babae, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2328,6 +2328,7 @@ MonoBehaviour:
   endPanel00: {fileID: 786709073}
   startText: {fileID: 1316273521}
   creditText: {fileID: 329909727}
+  audioSource: {fileID: 708794950}
 --- !u!4 &1884363184
 Transform:
   m_ObjectHideFlags: 0
@@ -2371,7 +2372,7 @@ RectTransform:
   m_GameObject: {fileID: 1995549653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 1784194944}
   m_RootOrder: 0
@@ -2430,7 +2431,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: eff7b8c1be16846eaa7fd814afb30208, type: 3}
-    m_FontSize: 30
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
