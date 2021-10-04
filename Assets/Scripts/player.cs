@@ -12,8 +12,6 @@ public class player : MonoBehaviour
     PlayerState playerState = PlayerState.SLEEP;
     Direction direction = Direction.STOP;
 
-    private bool buttonDownFlag = false;//追加
-
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -43,18 +41,8 @@ public class player : MonoBehaviour
     public void OnDash(InputAction.CallbackContext context)
     {
         
-        if(context.performed)
+        if(context.started)
 		{
-            /*
-            if(buttonDownFlag = true)//追加
-			{
-                speed = 10f;
-            }
-            if (buttonDownFlag = false)//追加
-            {
-                speed = 1f;
-            }
-            */
             speed = 10f;
             //押しっぱなしのときを感知して、speedniに*
             Debug.Log(context.ReadValueAsButton());
@@ -62,20 +50,14 @@ public class player : MonoBehaviour
         }
         if(context.canceled)
 		{
-            speed = 1f;
+            speed = 3f;
             Debug.Log(context.ReadValueAsButton());
         }
     }
 
     void Update()
     {
-        /*
-        if (buttonDownFlag)//追加
-        {
-            Debug.Log("Hold");
-        }
-        */
-
+       
         if (move.x < 0)
         {
             direction = Direction.LEFT;
@@ -90,22 +72,5 @@ public class player : MonoBehaviour
 
 
     }
-
-    /*
-    public void OnButtonDown()//追加
-	{
-        Debug.Log("Down");
-        buttonDownFlag = true;
-	}
-
-    public void OnButtonUp()//追加
-	{
-        if(buttonDownFlag)
-		{
-            Debug.Log("Up");
-            buttonDownFlag = false;
-        }
-	}
-    */
 
 }
