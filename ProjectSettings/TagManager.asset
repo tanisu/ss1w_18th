@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DummyPlayer
   - StartPoint
+  - Houtyou
   layers:
   - Default
   - TransparentFX

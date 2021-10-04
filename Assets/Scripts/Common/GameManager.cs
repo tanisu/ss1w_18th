@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     [SerializeField]
     private LoopManager loopManager;
+    private Fade fade;
 
     private void Awake()
     {
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState = GameState.PLAY;
+        if (GameObject.Find("FadeCanvas"))
+        {
+            fade = GameObject.Find("FadeCanvas").GetComponent<Fade>();
+        }
         
 
     }
@@ -36,12 +41,31 @@ public class GameManager : MonoBehaviour
     }
 
     public void IsCatch(){
-        loopManager.Loop();
+
+
+        StartCoroutine(_doFade());
     }
 
+    private IEnumerator _doFade()
+    {
+        fade.FadeIn(1f, () => { loopManager.Loop(); });
+        yield return new WaitForSeconds(1.1f);
+        fade.FadeOut(1f);
+    }
+
+    public void GetMoney()
+    {
+        //to nextScene
+    }
 
     public void ChangeGameState(GameState g)
     {
         gameState = g;
+    }
+
+    public void GameOver()
+    {
+        gameState = GameState.GAMEOVER;
+        // to GameOverScene
     }
 }
