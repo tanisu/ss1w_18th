@@ -37,13 +37,14 @@ public class LoopManager : MonoBehaviour
             loopCount++;
             if(loopCount >= loopMax)
             {
+                GameManager.I.GameOver();
                 return;
             }
             if(loopCount > 2)
             {
                 itemTiles.SetActive(true);
             }
-            Debug.Log(loopCount);
+            
             mapSprite.color = colors[loopCount];
             startPoint.GetComponent<StartPoint>().Restart();
             player.transform.position = startPoint.transform.position;
