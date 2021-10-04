@@ -7,6 +7,7 @@ TagManager:
   - DummyPlayer
   - StartPoint
   - Houtyou
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,7 @@ public class Otoshiana : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             sp.enabled = true;
+            collision.gameObject.GetComponent<player>().FallHole();
         }
     }
 }
