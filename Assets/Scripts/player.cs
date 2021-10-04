@@ -42,8 +42,10 @@ public class player : MonoBehaviour
     //離したらspeed１にしたい
     public void OnDash(InputAction.CallbackContext context)
     {
+        
         if(context.performed)
 		{
+            /*
             if(buttonDownFlag = true)//追加
 			{
                 speed = 10f;
@@ -52,20 +54,27 @@ public class player : MonoBehaviour
             {
                 speed = 1f;
             }
-            //OnButtonDown();
-            //speed = 10f;
+            */
+            speed = 10f;
             //押しっぱなしのときを感知して、speedniに*
             Debug.Log(context.ReadValueAsButton());
             //transform.Translate(move * Time.deltaTime * 100);
+        }
+        if(context.canceled)
+		{
+            speed = 1f;
+            Debug.Log(context.ReadValueAsButton());
         }
     }
 
     void Update()
     {
+        /*
         if (buttonDownFlag)//追加
         {
             Debug.Log("Hold");
         }
+        */
 
         if (move.x < 0)
         {
@@ -82,6 +91,7 @@ public class player : MonoBehaviour
 
     }
 
+    /*
     public void OnButtonDown()//追加
 	{
         Debug.Log("Down");
@@ -90,8 +100,12 @@ public class player : MonoBehaviour
 
     public void OnButtonUp()//追加
 	{
-        Debug.Log("Up");
-        buttonDownFlag = false;
+        if(buttonDownFlag)
+		{
+            Debug.Log("Up");
+            buttonDownFlag = false;
+        }
 	}
+    */
 
 }
