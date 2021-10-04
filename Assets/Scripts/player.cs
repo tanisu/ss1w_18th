@@ -77,6 +77,7 @@ public class player : MonoBehaviour
             direction = Direction.RIGHT;
         }
 
+        Debug.Log(isRunning);
 
         transform.Translate(move * Time.deltaTime * speed);
     }
