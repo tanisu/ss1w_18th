@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &139471539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4631,11 +4631,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3616007738508388802, guid: d3f446ed9fee3a54b8ff0a9d133178a5, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3616007738508388802, guid: d3f446ed9fee3a54b8ff0a9d133178a5, type: 3}
       propertyPath: cutoutRange
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3616007738508391644, guid: d3f446ed9fee3a54b8ff0a9d133178a5, type: 3}
+      propertyPath: StartFade
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3616007738508391644, guid: d3f446ed9fee3a54b8ff0a9d133178a5, type: 3}
       propertyPath: startFade
