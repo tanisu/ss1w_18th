@@ -23,7 +23,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float chaseSpeed,rangeToChase;
     private Transform target;
-
+    private SpriteRenderer sp;
+    private Color color;
+  //  private Color baseColor;
     
 
 
@@ -31,8 +33,11 @@ public class Enemy : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         waitCounter = waitTime;
-        target = GameObject.FindGameObjectWithTag("DummyPlayer").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         isMoveing = true;
+        sp = GetComponent<SpriteRenderer>();
+        color = new Color(0.2f, 0.2f, 1);
+        //baseColor = new Color(1f,1f,1f);
     }
 
     // Update is called once per frame
@@ -45,6 +50,7 @@ public class Enemy : MonoBehaviour
 
         if (!isChaseing)
         {
+            
             if (waitCounter > 0)
             {
                 waitCounter -= Time.deltaTime;
@@ -72,6 +78,7 @@ public class Enemy : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position,target.transform.position) < rangeToChase)
                 {
+                    
                     isChaseing = true;
                 }
             }
@@ -84,11 +91,13 @@ public class Enemy : MonoBehaviour
                 rb2d.velocity = Vector2.zero;
                 if(waitCounter <= 0)
                 {
-
+                    
                 }
+                
             }
             else
             {
+                sp.color = color;
                 moveDir = target.transform.position - transform.position;
                 moveDir.Normalize();
                 rb2d.velocity = moveDir * chaseSpeed;
@@ -109,14 +118,15 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("DummyPlayer"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (isChaseing)
             {
-                GameManager.I.ChangeGameState(GameState.GAMEOVER);
-                rb2d.velocity = Vector2.zero;
+                //GameManager.I.ChangeGameState(GameState.GAMEOVER);
+                GameManager.I.IsCatch();
+                //rb2d.velocity = Vector2.zero;
                 isMoveing = false;
-                Debug.Log("Dead");
+                sp.color = new Color(1f, 1f, 1f);
                 //restart loop
             }
         }
