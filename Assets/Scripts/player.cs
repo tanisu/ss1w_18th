@@ -43,7 +43,7 @@ public class player : MonoBehaviour
         
         if(context.started)
 		{
-            speed = 10f;
+            StartCoroutine(running());
             //押しっぱなしのときを感知して、speedniに*
             Debug.Log(context.ReadValueAsButton());
             //transform.Translate(move * Time.deltaTime * 100);
@@ -69,8 +69,21 @@ public class player : MonoBehaviour
 
 
         transform.Translate(move * Time.deltaTime * speed);
+    }
 
+    IEnumerator running()
+    {
+        speed = 10f;
+        // 指定した秒数待つ
+        yield return new WaitForSeconds(2f);
+
+        speed = 1f;
+
+        yield return new WaitForSeconds(2f);
+
+        speed = 3f;
 
     }
+
 
 }
