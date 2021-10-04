@@ -118,6 +118,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent("player");
             if (isChaseing)
             {
                 
