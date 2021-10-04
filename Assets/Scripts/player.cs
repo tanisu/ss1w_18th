@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class player : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class player : MonoBehaviour
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             playerState = PlayerState.WAKE;
         }
+
         Debug.Log(context.ReadValue<Vector2>());
         // 押しっぱなしの動作は、直接オブジェクトを動かすのではなく方向性のみを登録する
         move = context.ReadValue<Vector2>();
@@ -105,4 +107,15 @@ public class player : MonoBehaviour
 
     //isTired = trueだったら、という関数作る
 
+
+
+    public void FallHole()
+    {
+        transform.DOScale(Vector3.zero,1f).OnComplete(()=> {
+            GameManager.I.IsCatch();
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        });
+    }
+
+    
 }
