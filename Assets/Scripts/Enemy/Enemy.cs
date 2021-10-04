@@ -19,13 +19,13 @@ public class Enemy : MonoBehaviour
     private bool chase;
 
     private bool isChaseing;
-    private bool isMoveing;
+  
     [SerializeField]
     private float chaseSpeed,rangeToChase;
     private Transform target;
     private SpriteRenderer sp;
     private Color color;
-  //  private Color baseColor;
+  
     
 
 
@@ -34,19 +34,16 @@ public class Enemy : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         waitCounter = waitTime;
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        isMoveing = true;
+        //isMoveing = true;
         sp = GetComponent<SpriteRenderer>();
         color = new Color(0.2f, 0.2f, 1);
-        //baseColor = new Color(1f,1f,1f);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isMoveing)
-        {
-            return;
-        }
+
 
         if (!isChaseing)
         {
@@ -122,12 +119,12 @@ public class Enemy : MonoBehaviour
         {
             if (isChaseing)
             {
-                //GameManager.I.ChangeGameState(GameState.GAMEOVER);
+                
                 GameManager.I.IsCatch();
-                //rb2d.velocity = Vector2.zero;
-                isMoveing = false;
+                
+                
                 sp.color = new Color(1f, 1f, 1f);
-                //restart loop
+                
             }
         }
     }
