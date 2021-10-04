@@ -6,24 +6,22 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody2D rb2d;
 
-    [SerializeField]
-    private float moveSpeed, waitTime, walkTime;
+    [SerializeField] float moveSpeed, waitTime, walkTime;
 
     private float waitCounter,moveCounter;
 
     private Vector2 moveDir;
 
-    [SerializeField]
-    private BoxCollider2D area;
-    [SerializeField]
-    private bool chase;
+    [SerializeField] BoxCollider2D area;
+    [SerializeField] bool chase;
 
     private bool isChaseing;
-    private bool isMoveing;
-    [SerializeField]
-    private float chaseSpeed,rangeToChase;
+  
+    [SerializeField] float chaseSpeed,rangeToChase;
     private Transform target;
-
+    private SpriteRenderer sp;
+    private Color color;
+  
     
 
 
@@ -31,20 +29,21 @@ public class Enemy : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         waitCounter = waitTime;
-        target = GameObject.FindGameObjectWithTag("DummyPlayer").transform;
-        isMoveing = true;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        //isMoveing = true;
+        sp = GetComponent<SpriteRenderer>();
+        color = new Color(0.2f, 0.2f, 1);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isMoveing)
-        {
-            return;
-        }
+
 
         if (!isChaseing)
         {
+            
             if (waitCounter > 0)
             {
                 waitCounter -= Time.deltaTime;
@@ -72,6 +71,7 @@ public class Enemy : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position,target.transform.position) < rangeToChase)
                 {
+                    
                     isChaseing = true;
                 }
             }
@@ -84,11 +84,13 @@ public class Enemy : MonoBehaviour
                 rb2d.velocity = Vector2.zero;
                 if(waitCounter <= 0)
                 {
-
+                    
                 }
+                
             }
             else
             {
+                sp.color = color;
                 moveDir = target.transform.position - transform.position;
                 moveDir.Normalize();
                 rb2d.velocity = moveDir * chaseSpeed;
@@ -107,17 +109,23 @@ public class Enemy : MonoBehaviour
             );
     }
 
+    public void ChangeChase()
+    {
+        chase = true;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("DummyPlayer"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (isChaseing)
             {
-                GameManager.I.ChangeGameState(GameState.GAMEOVER);
-                rb2d.velocity = Vector2.zero;
-                isMoveing = false;
-                Debug.Log("Dead");
-                //restart loop
+                
+                GameManager.I.IsCatch();
+                
+                
+                sp.color = new Color(1f, 1f, 1f);
+                
             }
         }
     }

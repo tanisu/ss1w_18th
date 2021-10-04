@@ -11,7 +11,7 @@ public class WrapPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("DummyPlayer"))
+        if (collision.CompareTag("Player"))
         {
             collision.gameObject.transform.position = nextPos;
             cam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = nextConfiner.GetComponent<Collider2D>();

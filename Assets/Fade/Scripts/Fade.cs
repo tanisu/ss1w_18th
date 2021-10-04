@@ -27,15 +27,17 @@ using UnityEngine.Assertions;
 public class Fade : MonoBehaviour
 {
 	IFade fade;
-	[SerializeField] bool startFade;
+	[SerializeField] bool StartFade;      //トランジション用変数
 
-	void Start ()
+
+	void Awake ()
 	{
-		Init ();
-        if (startFade)
-        {
-			cutoutRange = 1f;
-        }
+		Init();
+		//シーン立ち上げ時にトランジションを掛けるか
+		if (StartFade == true)
+		{
+			cutoutRange = 1;
+		}
 		fade.Range = cutoutRange;
 	}
 
@@ -49,10 +51,6 @@ public class Fade : MonoBehaviour
 	void OnValidate ()
 	{
 		Init ();
-		if (startFade)
-		{
-			cutoutRange = 1f;
-		}
 		fade.Range = cutoutRange;
 	}
 
