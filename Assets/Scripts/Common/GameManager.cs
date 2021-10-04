@@ -29,9 +29,11 @@ public class GameManager : MonoBehaviour
         if (GameObject.Find("FadeCanvas"))
         {
             fade = GameObject.Find("FadeCanvas").GetComponent<Fade>();
+            if (fade)
+            {
+                fade.FadeOut(1f);
+            }
         }
-        
-
     }
 
     // Update is called once per frame
