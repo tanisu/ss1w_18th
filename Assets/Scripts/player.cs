@@ -12,6 +12,8 @@ public class player : MonoBehaviour
     PlayerState playerState = PlayerState.SLEEP;
     Direction direction = Direction.STOP;
 
+    private bool isRunning;
+
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -44,15 +46,23 @@ public class player : MonoBehaviour
         if(context.started)
 		{
             StartCoroutine(running());
-            //押しっぱなしのときを感知して、speedniに*
             Debug.Log(context.ReadValueAsButton());
-            //transform.Translate(move * Time.deltaTime * 100);
         }
+        
         if(context.canceled)
 		{
             speed = 3f;
             Debug.Log(context.ReadValueAsButton());
+
+            /*
+            if(IEnumerator running()中だったら)
+			{
+                キー入力無効みたいな感じにしたい
+            }
+            */
+
         }
+
     }
 
     void Update()
@@ -73,6 +83,10 @@ public class player : MonoBehaviour
 
     IEnumerator running()
     {
+        if (isRunning) yield break;
+
+        isRunning = true;
+
         speed = 10f;
         // 指定した秒数待つ
         yield return new WaitForSeconds(2f);
@@ -83,7 +97,7 @@ public class player : MonoBehaviour
 
         speed = 3f;
 
+        isRunning = false;
     }
-
 
 }
