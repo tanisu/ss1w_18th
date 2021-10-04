@@ -6,22 +6,18 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody2D rb2d;
 
-    [SerializeField]
-    private float moveSpeed, waitTime, walkTime;
+    [SerializeField] float moveSpeed, waitTime, walkTime;
 
     private float waitCounter,moveCounter;
 
     private Vector2 moveDir;
 
-    [SerializeField]
-    private BoxCollider2D area;
-    [SerializeField]
-    private bool chase;
+    [SerializeField] BoxCollider2D area;
+    [SerializeField] bool chase;
 
     private bool isChaseing;
   
-    [SerializeField]
-    private float chaseSpeed,rangeToChase;
+    [SerializeField] float chaseSpeed,rangeToChase;
     private Transform target;
     private SpriteRenderer sp;
     private Color color;
@@ -111,6 +107,11 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, area.bounds.min.x + 1, area.bounds.max.x - 1),
             Mathf.Clamp(transform.position.y, area.bounds.min.y + 1, area.bounds.max.y - 1), transform.position.z
             );
+    }
+
+    public void ChangeChase()
+    {
+        chase = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

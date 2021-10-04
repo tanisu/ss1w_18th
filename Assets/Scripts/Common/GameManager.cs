@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private LoopManager loopManager;
     private Fade fade;
+    private bool hasMoney;
 
     private void Awake()
     {
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
     public void GetMoney()
     {
         //to nextScene
+        hasMoney = true;
     }
 
     public void ChangeGameState(GameState g)
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameState = GameState.GAMEOVER;
+        fade.FadeIn(1f, () => SceneManager.LoadScene("GameOver"));
+
         // to GameOverScene
     }
 }
