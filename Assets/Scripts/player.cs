@@ -12,7 +12,8 @@ public class player : MonoBehaviour
     PlayerState playerState = PlayerState.SLEEP;
     Direction direction = Direction.STOP;
 
-    private bool isRunning;
+    private bool isRunning = false;//何も書いてないとfalse
+    private bool isTired = false;
 
     private void Start()
     {
@@ -55,7 +56,7 @@ public class player : MonoBehaviour
             Debug.Log(context.ReadValueAsButton());
 
             /*
-            if(IEnumerator running()中だったら)
+            if(isTired = true)
 			{
                 キー入力無効みたいな感じにしたい
             }
@@ -92,7 +93,8 @@ public class player : MonoBehaviour
         // 指定した秒数待つ
         yield return new WaitForSeconds(2f);
 
-        speed = 1f;
+        speed = 1f;//isTiredの関数内でいいかも
+        isTired = true;
 
         yield return new WaitForSeconds(2f);
 
@@ -100,5 +102,7 @@ public class player : MonoBehaviour
 
         isRunning = false;
     }
+
+    //isTired = trueだったら、という関数作る
 
 }
