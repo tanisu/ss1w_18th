@@ -14,10 +14,10 @@ public class HoutyouGenerator : MonoBehaviour
     IEnumerator _spawn()
     {
         
-        for(int i = 0;i < 5; i++)
+        while(true)
         {
-            yield return new WaitForSeconds(5f);
-            Vector3 spawnPos = new Vector3(transform.position.x, Random.Range(-1f, -4f), transform.position.z);
+            yield return new WaitForSeconds(3.5f);
+            Vector3 spawnPos = new Vector3(transform.position.x, Random.Range(-0.5f, -4.3f), transform.position.z);
             Instantiate(houtyouPrefab, spawnPos, transform.rotation);
             
         }
