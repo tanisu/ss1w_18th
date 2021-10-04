@@ -62,8 +62,11 @@ public class player : MonoBehaviour
 
     void Update()
     {
+        if (buttonDownFlag)//追加
+        {
+            Debug.Log("Hold");
+        }
 
-        
         if (move.x < 0)
         {
             direction = Direction.LEFT;
@@ -72,12 +75,6 @@ public class player : MonoBehaviour
         {
             direction = Direction.RIGHT;
         }
-
-
-        if(buttonDownFlag)//追加
-		{
-            Debug.Log("Hold");
-		}
 
 
         transform.Translate(move * Time.deltaTime * speed);
