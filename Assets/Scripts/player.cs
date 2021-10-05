@@ -24,6 +24,7 @@ public class player : MonoBehaviour
 
     public void RepeatDream()
     {
+        transform.localScale = new Vector3(1f, 1f, 1f);
         rb2d.bodyType = RigidbodyType2D.Static;
         playerState = PlayerState.SLEEP;
     }
@@ -113,7 +114,7 @@ public class player : MonoBehaviour
     {
         transform.DOScale(Vector3.zero,1f).OnComplete(()=> {
             GameManager.I.IsCatch();
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            
         });
     }
 
