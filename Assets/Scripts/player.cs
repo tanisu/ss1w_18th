@@ -24,6 +24,8 @@ public class player : MonoBehaviour
 
     public void RepeatDream()
     {
+        Debug.Log("");
+        transform.localRotation = new Quaternion(0f, 0f, 45f, 0f);
         transform.localScale = new Vector3(1f, 1f, 1f);
         rb2d.bodyType = RigidbodyType2D.Static;
         playerState = PlayerState.SLEEP;
@@ -34,6 +36,7 @@ public class player : MonoBehaviour
 
         if (playerState == PlayerState.SLEEP)
         {
+            transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             playerState = PlayerState.WAKE;
         }
@@ -97,9 +100,9 @@ public class player : MonoBehaviour
 
         isRunning = true;
 
-        speed = 10f;
+        speed = 5f;
         // 指定した秒数待つ
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         speed = 0f;//isTiredの関数内でいいかも
         isTired = true;
