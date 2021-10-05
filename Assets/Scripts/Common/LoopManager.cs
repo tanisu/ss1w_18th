@@ -13,6 +13,8 @@ public class LoopManager : MonoBehaviour
     [SerializeField] GameObject houtyouGenerator;
     [SerializeField] GameObject trap;
     [SerializeField] GameObject enemiyWrapper;
+    [SerializeField] GameObject globalLight;
+    [SerializeField] GameObject pointLight;
     Color[] colors;
     GameObject startPoint;
     GameObject player;
@@ -71,6 +73,8 @@ public class LoopManager : MonoBehaviour
             keyItem.SetActive(true);
             trap.SetActive(true);
             houtyouGenerator.SetActive(true);
+            globalLight.SetActive(false);
+            pointLight.SetActive(true);
             for(int i = 0;i < enemies.Length; i++)
             {
                 enemies[i].ChangeChase();
