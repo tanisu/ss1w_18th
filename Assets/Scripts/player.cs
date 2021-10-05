@@ -24,11 +24,14 @@ public class player : MonoBehaviour
 
     public void RepeatDream()
     {
-        Debug.Log("");
-        transform.localRotation = new Quaternion(0f, 0f, 45f, 0f);
+        Debug.Log("repeat");
+        
         transform.localScale = new Vector3(1f, 1f, 1f);
         rb2d.bodyType = RigidbodyType2D.Static;
         playerState = PlayerState.SLEEP;
+        Debug.Log(transform.rotation);
+
+        transform.rotation = new Quaternion(0f, 0f, 0,0.5f);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -36,12 +39,12 @@ public class player : MonoBehaviour
 
         if (playerState == PlayerState.SLEEP)
         {
-            transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+            transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
             playerState = PlayerState.WAKE;
         }
 
-        Debug.Log(context.ReadValue<Vector2>());
+       // Debug.Log(context.ReadValue<Vector2>());
         // 押しっぱなしの動作は、直接オブジェクトを動かすのではなく方向性のみを登録する
         move = context.ReadValue<Vector2>();
     }
@@ -62,7 +65,7 @@ public class player : MonoBehaviour
             Debug.Log(context.ReadValueAsButton());
 
             
-            if(isTired = true)
+            if(isTired == true)
 			{
                 StartCoroutine(tiredboy());
                 //speed = 1f;
