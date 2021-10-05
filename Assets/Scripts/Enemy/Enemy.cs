@@ -54,6 +54,14 @@ public class Enemy : MonoBehaviour
                     moveCounter = walkTime;
 
                     moveDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                    if(moveDir.x > 0)
+                    {
+                        transform.localScale = new Vector3(-1, 1, 1);
+                    }
+                    else
+                    {
+                        transform.localScale = new Vector3(1, 1, 1);
+                    }
                     moveDir.Normalize();
                 }
             }
