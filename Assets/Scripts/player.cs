@@ -11,7 +11,7 @@ public class player : MonoBehaviour
     [SerializeField]
     float speed;
     PlayerState playerState = PlayerState.SLEEP;
-    Direction direction = Direction.STOP;
+    //Direction direction = Direction.STOP;
 
     private bool isRunning = false;//何も書いてないとfalse
     private bool isTired = false;
@@ -76,11 +76,13 @@ public class player : MonoBehaviour
        
         if (move.x < 0)
         {
-            direction = Direction.LEFT;
+            transform.localScale = new Vector3(1f, 1f, 1f);
+            //direction = Direction.LEFT;
         }
         else if (move.x > 0)
         {
-            direction = Direction.RIGHT;
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            //direction = Direction.RIGHT;
         }
 
         Debug.Log(isTired);
@@ -119,11 +121,12 @@ public class player : MonoBehaviour
         isTired = false;
     }
     
+    
 
 
-
-    public void FallHole()
+    public void FallHole(Transform tf)
     {
+        transform.DOMove(tf.position, 1f);
         transform.DOScale(Vector3.zero,1f).OnComplete(()=> {
             GameManager.I.IsCatch();
             
