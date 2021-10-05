@@ -58,12 +58,14 @@ public class player : MonoBehaviour
             speed = 3f;
             Debug.Log(context.ReadValueAsButton());
 
-            /*
+            
             if(isTired = true)
 			{
-                キー入力無効みたいな感じにしたい
+                StartCoroutine(tiredboy());
+                //speed = 1f;
+                //キー入力無効みたいな感じにしたい
             }
-            */
+            
 
         }
 
@@ -81,6 +83,7 @@ public class player : MonoBehaviour
             direction = Direction.RIGHT;
         }
 
+        Debug.Log(isTired);
         Debug.Log(isRunning);
 
         transform.Translate(move * Time.deltaTime * speed);
@@ -96,7 +99,7 @@ public class player : MonoBehaviour
         // 指定した秒数待つ
         yield return new WaitForSeconds(2f);
 
-        speed = 1f;//isTiredの関数内でいいかも
+        speed = 0f;//isTiredの関数内でいいかも
         isTired = true;
 
         yield return new WaitForSeconds(2f);
@@ -107,6 +110,15 @@ public class player : MonoBehaviour
     }
 
     //isTired = trueだったら、という関数作る
+    
+    IEnumerator tiredboy()
+	{
+        speed = 0f;
+        yield return new WaitForSeconds(2f);
+
+        isTired = false;
+    }
+    
 
 
 
