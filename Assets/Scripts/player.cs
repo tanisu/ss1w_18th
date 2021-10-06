@@ -24,14 +24,12 @@ public class player : MonoBehaviour
 
     public void RepeatDream()
     {
-        Debug.Log("repeat");
         
         transform.localScale = new Vector3(1f, 1f, 1f);
         rb2d.bodyType = RigidbodyType2D.Static;
+        
         playerState = PlayerState.SLEEP;
-        Debug.Log(transform.rotation);
-
-        transform.rotation = new Quaternion(0f, 0f, 0,0.5f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 90f);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -39,8 +37,9 @@ public class player : MonoBehaviour
 
         if (playerState == PlayerState.SLEEP)
         {
-            transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             rb2d.bodyType = RigidbodyType2D.Dynamic;
+            rb2d.gravityScale = 0f;
             playerState = PlayerState.WAKE;
         }
 
@@ -79,6 +78,10 @@ public class player : MonoBehaviour
 
     void Update()
     {
+        if(playerState != PlayerState.WAKE)
+        {
+            return;
+        }
        
         if (move.x < 0)
         {
@@ -103,7 +106,7 @@ public class player : MonoBehaviour
 
         isRunning = true;
 
-        speed = 5f;
+        speed = 6f;
         // 指定した秒数待つ
         yield return new WaitForSeconds(3f);
 
@@ -128,16 +131,24 @@ public class player : MonoBehaviour
     }
     
     
-
+    public void FallBillding()
+    {
+        rb2d.gravityScale = 1.5f;
+        rb2d.velocity = Vector2.zero;
+        PlayerDead();
+    }
 
     public void FallHole(Transform tf)
     {
-        transform.DOMove(tf.position, 1f);
-        transform.DOScale(Vector3.zero,1f).OnComplete(()=> {
+        PlayerDead();
+        transform.DOMove(tf.position, 1f).SetLink(gameObject);
+        transform.DOScale(Vector3.zero,1f).SetLink(gameObject).OnComplete(()=> {
             GameManager.I.IsCatch();
-            
         });
     }
 
-    
+    public void PlayerDead()
+    {
+        playerState = PlayerState.DEAD;
+    }
 }
