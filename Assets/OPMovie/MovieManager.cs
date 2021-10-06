@@ -13,11 +13,13 @@ public class MovieManager : MonoBehaviour
     public Text startText;
     public Text creditText;
     public AudioSource audioSource;
+    public Fade fade;
 
 
     private void Start()
     {
         StartCoroutine(StartMovie());
+
     }
 
     IEnumerator StartMovie()
@@ -57,7 +59,7 @@ public class MovieManager : MonoBehaviour
         panelParent.transform.localPosition = new Vector2(0, 600);
         endPanel00.DOFade(1, 10f);
         yield return new WaitForSeconds(11);
-        SceneManager.LoadScene("Title");
+        
 
 
 
@@ -92,7 +94,8 @@ public class MovieManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("Title");
+            fade.FadeIn(1f, () => SceneManager.LoadScene("Office"));
+            
         }
     }
 }
