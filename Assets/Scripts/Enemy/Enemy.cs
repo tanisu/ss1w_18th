@@ -101,6 +101,14 @@ public class Enemy : MonoBehaviour
                 sp.color = color;
                 moveDir = target.transform.position - transform.position;
                 moveDir.Normalize();
+                if (moveDir.x > 0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
                 rb2d.velocity = moveDir * chaseSpeed;
             }
 
@@ -126,7 +134,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent("player");
+            collision.gameObject.GetComponent<player>().PlayerDead();
             if (isChaseing)
             {
                 

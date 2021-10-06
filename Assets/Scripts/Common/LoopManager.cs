@@ -15,6 +15,9 @@ public class LoopManager : MonoBehaviour
     [SerializeField] GameObject enemiyWrapper;
     [SerializeField] GameObject globalLight;
     [SerializeField] GameObject pointLight;
+    [SerializeField] GameObject nextConfiner;
+    [SerializeField] WrapPoint[] wrapPoints;
+    [SerializeField] Vector2 nextPos;
     Color[] colors;
     GameObject startPoint;
     GameObject player;
@@ -47,11 +50,11 @@ public class LoopManager : MonoBehaviour
                 return;
             }
 
-
-            _changeWithLoop();
-            startPoint.GetComponent<StartPoint>().Restart();
+            
             player.transform.position = startPoint.transform.position;
             player.GetComponent<player>().RepeatDream();
+            _changeWithLoop();
+            startPoint.GetComponent<StartPoint>().Restart();
 
         }
     }
@@ -67,18 +70,50 @@ public class LoopManager : MonoBehaviour
 
     private void _changeWithLoop()
     {
+        if(loopCount == 1)
+        {
+            if (trap)
+            {
+                trap.SetActive(true);
+            }
+            if (wrapPoints.Length > 0)
+            {
+                foreach (WrapPoint wrapPoint in wrapPoints)
+                {
+                    wrapPoint.ChangeConfiner(nextConfiner);
+                    wrapPoint.ChangeNextPos(nextPos);
+                }
+            }
+            
+        }
+
         if (loopCount == 2)
         {
-            itemTiles.SetActive(true);
-            keyItem.SetActive(true);
-            trap.SetActive(true);
-            houtyouGenerator.SetActive(true);
+            if (itemTiles)
+            {
+                itemTiles.SetActive(true);
+            }
+            if (keyItem)
+            {
+                keyItem.SetActive(true);
+            }
+            
+
+            if (houtyouGenerator)
+            {
+                houtyouGenerator.SetActive(true);
+            }
+            if (enemies.Length > 0)
+            {
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    enemies[i].ChangeChase();
+                }
+            }
             globalLight.SetActive(false);
             pointLight.SetActive(true);
-            for(int i = 0;i < enemies.Length; i++)
-            {
-                enemies[i].ChangeChase();
-            }
+
+
         }
         mapSprite.color = colors[loopCount];
     }

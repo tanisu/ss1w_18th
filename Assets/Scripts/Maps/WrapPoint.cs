@@ -17,4 +17,12 @@ public class WrapPoint : MonoBehaviour
             cam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = nextConfiner.GetComponent<Collider2D>();
         }
     }
+    public void ChangeNextPos(Vector2 pos) {
+            nextPos = pos;
+        } 
+
+    public void ChangeConfiner(GameObject confiner)
+    {
+        nextConfiner = confiner;
+    }
 }

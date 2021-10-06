@@ -58,16 +58,12 @@ public class GameManager : MonoBehaviour
         fade.FadeOut(1f);
     }
 
-    public void GetMoney()
+    public void StageClear(string nextSecne)
     {
-        //to nextScene
-        hasMoney = true;
+        fade.FadeIn(1f, () => SceneManager.LoadScene(nextSecne));
     }
 
-    public void ChangeGameState(GameState g)
-    {
-        gameState = g;
-    }
+  
 
     public void GameOver()
     {
