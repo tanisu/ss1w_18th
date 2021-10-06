@@ -9,6 +9,6 @@ public class FadeTitle : MonoBehaviour
     public float fadeTime = 1f;
     public void OnNextScene()
     {
-        fade.FadeIn(fadeTime, () => SceneManager.LoadScene("TestScene"));
+        fade.FadeIn(fadeTime, () => SceneManager.LoadScene("Office"));
     }
 }

@@ -134,10 +134,10 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<player>().PlayerDead();
+            
             if (isChaseing)
             {
-                
+                collision.gameObject.GetComponent<player>().PlayerDead();
                 GameManager.I.IsCatch();
                 
                 
