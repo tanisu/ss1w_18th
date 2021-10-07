@@ -18,7 +18,7 @@ public class player : MonoBehaviour
 
     PlayerState playerState = PlayerState.SLEEP;
 
-    private bool isRunning ,isTired,changeColor;//何も書いてないとfalse
+    private bool isRunning ,isTired;//何も書いてないとfalse
         
     private float totalTime;
     private int seconds;
@@ -79,7 +79,6 @@ public class player : MonoBehaviour
             speed = dashSpeed;
             sp.color = Color.red;
             ase.SetActive(true);
-            //sp.DOColor(Color.red, limitTime).SetLink(gameObject);
             isRunning = true;
         }
   //      if(context.started)
@@ -92,7 +91,6 @@ public class player : MonoBehaviour
 		{
             ase.SetActive(false);
             sp.color = Color.white;
-            //sp.DOColor(Color.white, 0.5f).SetLink(gameObject);
             totalTime = 0;
             isRunning = false;
             speed = 3f;
@@ -141,11 +139,8 @@ public class player : MonoBehaviour
 
     private void _stopCount()
     {
-        if (!changeColor)
-        {
-            ase.SetActive(false);
-            _changeColor();
-        }
+        ase.SetActive(false);
+        sp.color = Color.cyan;
         totalTime += Time.deltaTime;
         seconds = (int)totalTime;
         
@@ -160,11 +155,6 @@ public class player : MonoBehaviour
         }
     }
 
-    private void _changeColor()
-    {
-        sp.color = Color.cyan;
-        changeColor = true;
-    }
 
     private void _countDown()
     {

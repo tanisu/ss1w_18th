@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -9,8 +10,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager I;
     public GameState gameState;
-    [SerializeField]
-    private LoopManager loopManager;
+    [SerializeField] LoopManager loopManager;
+    [SerializeField] GameObject messageText;
+    private Text mess;
     private Fade fade;
     private bool hasMoney;
 
@@ -28,13 +30,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        mess = messageText.GetComponent<Text>();
         gameState = GameState.PLAY;
         if (GameObject.Find("FadeCanvas"))
         {
             fade = GameObject.Find("FadeCanvas").GetComponent<Fade>();
             if (fade)
             {
-                fade.FadeOut(1f);
+                mess.text = "やべ、また会社で寝ちゃった！";
+                StartCoroutine("_startFade");
+                //fade.FadeOut(1f);
             }
         }
     }
@@ -51,11 +56,23 @@ public class GameManager : MonoBehaviour
         StartCoroutine(_doFade());
     }
 
+    private IEnumerator _startFade()
+    {
+        
+        messageText.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        messageText.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        fade.FadeOut(1f);
+    }
+
     private IEnumerator _doFade()
     {
         fade.FadeIn(1f, () => { loopManager.Loop(); });
         yield return new WaitForSeconds(1.1f);
-        fade.FadeOut(1f);
+        mess.text = "なんだ、、、夢か、、";
+        StartCoroutine("_startFade");
+        //fade.FadeOut(1f);
     }
 
     public void StageClear(string nextSecne)
@@ -65,11 +82,5 @@ public class GameManager : MonoBehaviour
 
   
 
-    public void GameOver()
-    {
-        gameState = GameState.GAMEOVER;
-        fade.FadeIn(1f, () => SceneManager.LoadScene("GameOver"));
 
-        // to GameOverScene
-    }
 }
