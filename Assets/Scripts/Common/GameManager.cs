@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] LoopManager loopManager;
     [SerializeField] GameObject messageText;
     private Text mess;
+    private string[] mess_2 = new string[] { "あれ、外でねちゃったのか","酒、呑みすぎたかな？","ママ、ママはどこ！え、夢？" };
     private Fade fade;
     private bool hasMoney;
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         mess = messageText.GetComponent<Text>();
         gameState = GameState.PLAY;
         SoundManager.instance.PlayBGM(SoundManager.BGM.Normal);
@@ -38,7 +40,16 @@ public class GameManager : MonoBehaviour
             fade = GameObject.Find("FadeCanvas").GetComponent<Fade>();
             if (fade)
             {
-                mess.text = "やべ、また会社で寝ちゃった！";
+                if(SceneManager.GetActiveScene().name == "Office")
+                {
+                    mess.text = "やべ、また会社で寝ちゃった！";
+                }
+                else
+                {
+                    string m = mess_2[Random.Range(0, mess_2.Length )];
+                    mess.text = m;
+                }
+                
                 StartCoroutine("_startFade");
                 //fade.FadeOut(1f);
             }
@@ -70,7 +81,17 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _doFade()
     {
-        fade.FadeIn(1f, () => { loopManager.Loop(); });
+        fade.FadeIn(1f, () => { 
+            if(SceneManager.GetActiveScene().name == "Office")
+            {
+                loopManager.Loop();
+            }
+            else if(SceneManager.GetActiveScene().name == "Town")
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            
+        });
         yield return new WaitForSeconds(1.1f);
         mess.text = "なんだ、、、夢か、、";
         StartCoroutine("_startFade");
