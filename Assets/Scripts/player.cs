@@ -68,7 +68,10 @@ public class player : MonoBehaviour
     //離したらspeed１にしたい
     public void OnDash(InputAction.CallbackContext context)
     {
-        
+        if (playerState != PlayerState.WAKE)
+        {
+            return;
+        }
         if (isTired)
         {
             return;
@@ -76,16 +79,19 @@ public class player : MonoBehaviour
 
         if (context.started)
         {
+            SoundManager.instance.PlaySE(SoundManager.SE.RunSingle);
             speed = dashSpeed;
             sp.color = Color.red;
             ase.SetActive(true);
             isRunning = true;
         }
-  //      if(context.started)
-		//{
-  //          StartCoroutine(running());
-  //          Debug.Log(context.ReadValueAsButton());
-  //      }
+
+        //if (context.performed)
+        //{
+            
+        //    StartCoroutine(_dashSound());
+        //}
+
         
         if(context.canceled)
 		{
@@ -94,20 +100,11 @@ public class player : MonoBehaviour
             totalTime = 0;
             isRunning = false;
             speed = 3f;
-            //Debug.Log(context.ReadValueAsButton());
-
-            
-   //         if(isTired == true)
-			//{
-   //             StartCoroutine(tiredboy());
-   //             //speed = 1f;
-   //             //キー入力無効みたいな感じにしたい
-   //         }
-            
-
         }
 
     }
+
+
 
     void Update()
     {
@@ -158,6 +155,7 @@ public class player : MonoBehaviour
 
     private void _countDown()
     {
+       // StartCoroutine(_dashSound());
         totalTime += Time.deltaTime;
         seconds = (int)totalTime;
         if(seconds > limitTime)
@@ -168,6 +166,56 @@ public class player : MonoBehaviour
             isTired = true;
         }
     }
+
+    IEnumerator _dashSound()
+    {
+        if (!isRunning) yield break;
+
+        while (isRunning)
+        {
+            SoundManager.instance.PlaySE(SoundManager.SE.RunSingle);
+            yield return new WaitForSeconds(0.2f);
+            
+        }
+        
+    }
+  
+    
+    
+    public void FallBillding()
+    {
+        rb2d.gravityScale = 1.5f;
+        rb2d.velocity = Vector2.zero;
+        
+        StartCoroutine(_screaming());
+        PlayerDead();
+    }
+
+    public void FallHole(Transform tf)
+    {
+        StartCoroutine(_screaming());
+        PlayerDead();
+        transform.DOMove(tf.position, 1f).SetLink(gameObject);
+        transform.DOScale(Vector3.zero,1f).SetLink(gameObject).OnComplete(()=> {
+            GameManager.I.IsCatch();
+        });
+    }
+
+    IEnumerator _screaming()
+    {
+        SoundManager.instance.PlaySE(SoundManager.SE.Fall);
+        yield return new WaitForSeconds(0.3f);
+        SoundManager.instance.PlaySE(SoundManager.SE.Screaming);
+
+
+    }
+
+    public void PlayerDead()
+    {
+        isRunning = false;
+        playerState = PlayerState.DEAD;
+    }
+
 
     IEnumerator running()
     {
@@ -190,34 +238,12 @@ public class player : MonoBehaviour
     }
 
     //isTired = trueだったら、という関数作る
-    
+
     IEnumerator tiredboy()
-	{
+    {
         speed = 0f;
         yield return new WaitForSeconds(2f);
 
         isTired = false;
-    }
-    
-    
-    public void FallBillding()
-    {
-        rb2d.gravityScale = 1.5f;
-        rb2d.velocity = Vector2.zero;
-        PlayerDead();
-    }
-
-    public void FallHole(Transform tf)
-    {
-        PlayerDead();
-        transform.DOMove(tf.position, 1f).SetLink(gameObject);
-        transform.DOScale(Vector3.zero,1f).SetLink(gameObject).OnComplete(()=> {
-            GameManager.I.IsCatch();
-        });
-    }
-
-    public void PlayerDead()
-    {
-        playerState = PlayerState.DEAD;
     }
 }

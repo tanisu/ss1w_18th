@@ -22,6 +22,8 @@ public class Houtyou : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<player>().PlayerDead();
+            SoundManager.instance.PlaySE(SoundManager.SE.KnifeDamage);
+            SoundManager.instance.PlaySE(SoundManager.SE.Screaming);
             GameManager.I.IsCatch();
             Destroy(gameObject);
         }

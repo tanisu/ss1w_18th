@@ -87,6 +87,8 @@ public class LoopManager : MonoBehaviour
 
         if (loopCount == changeLoopCount)
         {
+            SoundManager.instance.StopBGM();
+            SoundManager.instance.PlayBGM(SoundManager.BGM.Danger);
             if (itemTiles)
             {
                 itemTiles.SetActive(true);

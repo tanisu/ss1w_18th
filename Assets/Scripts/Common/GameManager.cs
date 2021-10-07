@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         mess = messageText.GetComponent<Text>();
         gameState = GameState.PLAY;
+        SoundManager.instance.PlayBGM(SoundManager.BGM.Normal);
         if (GameObject.Find("FadeCanvas"))
         {
             fade = GameObject.Find("FadeCanvas").GetComponent<Fade>();
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         messageText.SetActive(false);
         yield return new WaitForSeconds(0.1f);
         fade.FadeOut(1f);
+        
     }
 
     private IEnumerator _doFade()
