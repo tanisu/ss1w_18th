@@ -7,17 +7,17 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField] float moveSpeed, waitTime, walkTime;
-
-    private float waitCounter,moveCounter;
-
-    private Vector2 moveDir;
-
     [SerializeField] BoxCollider2D area;
     [SerializeField] bool chase;
-
-    private bool isChaseing;
+    [SerializeField] float chaseSpeed, rangeToChase;
+    [SerializeField] Vector2 startPos;
+    private float waitCounter,moveCounter;
+    private Vector2 moveDir;
+ 
+    private bool isChaseing,setStart;
+    private bool canMove = true;
   
-    [SerializeField] float chaseSpeed,rangeToChase;
+    
     private Transform target;
     private SpriteRenderer sp;
     private Color color;
@@ -39,8 +39,18 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        if (setStart)
+        {
+            setStart = false;
+            transform.localPosition = startPos;
+            waitCounter = waitTime;
+            
+        }
+        if (!canMove)
+        {
+            SetStartPos();
+            return;
+        }
         if (!isChaseing)
         {
             
@@ -128,6 +138,25 @@ public class Enemy : MonoBehaviour
     public void ChangeChase()
     {
         chase = true;
+    }
+
+    public void SetStartPos()
+    {
+        setStart = true;
+    }
+
+    public void SetBaseColor()
+    {
+        sp.color = new Color(1f, 1f, 1f);
+    }
+
+    public void CanMove()
+    {
+        canMove = true;
+    }
+    public void StopMove()
+    {
+        canMove = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

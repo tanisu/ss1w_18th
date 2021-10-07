@@ -5,11 +5,7 @@ using UnityEngine;
 public class HoutyouGenerator : MonoBehaviour
 {
     [SerializeField] GameObject houtyouPrefab;
-    void Start()
-    {
-        // InvokeRepeating("Spawn", 2f, 0.5f);
-        StartCoroutine(_spawn());
-    }
+
 
     IEnumerator _spawn()
     {
@@ -21,7 +17,11 @@ public class HoutyouGenerator : MonoBehaviour
             Instantiate(houtyouPrefab, spawnPos, transform.rotation);
             
         }
-        
+    }
+
+    public void StartHoutyou()
+    {
+        StartCoroutine(_spawn());
     }
 
 
