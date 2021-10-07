@@ -6,33 +6,25 @@ using UnityEngine.Tilemaps;
 public class LoopManager : MonoBehaviour
 {
     private int loopCount = 0;
-    [SerializeField] int loopMax = 5;
+    [SerializeField] int loopMax,loopMin,changeLoopCount;
     [SerializeField] Tilemap mapSprite;
-    [SerializeField] GameObject itemTiles;
-    [SerializeField] GameObject keyItem;
-    [SerializeField] GameObject houtyouGenerator;
-    [SerializeField] GameObject trap;
-    [SerializeField] GameObject enemiyWrapper;
-    [SerializeField] GameObject globalLight;
-    [SerializeField] GameObject pointLight;
-    [SerializeField] GameObject nextConfiner;
+    [SerializeField] GameObject itemTiles, keyItem, houtyouGenerator, trap, enemiyWrapper, globalLight, pointLight, nextConfiner;
     [SerializeField] WrapPoint[] wrapPoints;
     [SerializeField] Vector2 nextPos;
-    Color[] colors;
+    [SerializeField] Color[] colors;
     GameObject startPoint;
     GameObject player;
     Enemy[] enemies;
-    // Start is called before the first frame update
+    
     void Start()
     {
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         player = GameObject.FindGameObjectWithTag("Player");
-        colors = new Color[] { Color.white,new Color(0.8f,0.2f,0.6f),Color.red, new Color(0.4f, 0.3f, 0.3f), Color.black};
         enemies = enemiyWrapper.GetComponentsInChildren<Enemy>();
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -40,23 +32,19 @@ public class LoopManager : MonoBehaviour
 
     public void Loop()
     {
-        if (loopCount < loopMax)
+        
+        
+        loopCount++;
+        player.transform.position = startPoint.transform.position;
+        player.GetComponent<player>().RepeatDream();
+        if (houtyouGenerator)
         {
-
-            loopCount++;
-            if(loopCount >= loopMax)
-            {
-                GameManager.I.GameOver();
-                return;
-            }
-
-            
-            player.transform.position = startPoint.transform.position;
-            player.GetComponent<player>().RepeatDream();
-            _changeWithLoop();
-            startPoint.GetComponent<StartPoint>().Restart();
-
+            houtyouGenerator.SetActive(false);
         }
+        _changeWithLoop();
+        startPoint.GetComponent<StartPoint>().Restart();
+
+
     }
 
     public void AddLoop()
@@ -70,7 +58,17 @@ public class LoopManager : MonoBehaviour
 
     private void _changeWithLoop()
     {
-        if(loopCount == 1)
+        if (enemies.Length > 0)
+        {
+            foreach (Enemy enemy in enemies)
+            {
+                
+                enemy.SetBaseColor();
+                enemy.StopMove();
+                //enemy.SetStartPos();
+            }
+        }
+        if (loopCount == loopMin)
         {
             if (trap)
             {
@@ -87,7 +85,7 @@ public class LoopManager : MonoBehaviour
             
         }
 
-        if (loopCount == 2)
+        if (loopCount == changeLoopCount)
         {
             if (itemTiles)
             {
@@ -99,14 +97,15 @@ public class LoopManager : MonoBehaviour
             }
             
 
-            if (houtyouGenerator)
-            {
-                houtyouGenerator.SetActive(true);
-            }
+            //if (houtyouGenerator)
+            //{
+            //    houtyouGenerator.SetActive(true);
+            //}
             if (enemies.Length > 0)
             {
                 for (int i = 0; i < enemies.Length; i++)
                 {
+                    
                     enemies[i].ChangeChase();
                 }
             }
@@ -115,6 +114,16 @@ public class LoopManager : MonoBehaviour
 
 
         }
-        mapSprite.color = colors[loopCount];
+        if(mapSprite && loopCount >= loopMin)
+        {
+            int idx = loopCount -1;
+            if (loopCount >= colors.Length)
+            {
+                idx = colors.Length - 1;
+            }
+
+            mapSprite.color = colors[idx];
+        }
+        
     }
 }
