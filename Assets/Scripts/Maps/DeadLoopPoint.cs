@@ -8,6 +8,7 @@ public class DeadLoopPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            
             GameManager.I.IsCatch();
             
         }

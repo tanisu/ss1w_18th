@@ -13,7 +13,7 @@ public class HoutyouGenerator : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(3.5f);
-            Vector3 spawnPos = new Vector3(transform.position.x, Random.Range(-11f, -15.5f), transform.position.z);
+            Vector3 spawnPos = new Vector3(transform.position.x, Random.Range(-12f, -15.5f), transform.position.z);
             Instantiate(houtyouPrefab, spawnPos, transform.rotation);
             
         }

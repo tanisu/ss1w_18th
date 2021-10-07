@@ -167,6 +167,7 @@ public class Enemy : MonoBehaviour
             if (isChaseing)
             {
                 collision.gameObject.GetComponent<player>().PlayerDead();
+                SoundManager.instance.PlaySE(SoundManager.SE.Screaming);
                 GameManager.I.IsCatch();
                 
                 

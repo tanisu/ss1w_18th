@@ -12,6 +12,7 @@ public class Satutaba : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SoundManager.instance.PlaySE(SoundManager.SE.ItemGet);
             if(wrapPoints.Length > 0)
             {
                 foreach(GameObject wrapPoint in wrapPoints)
