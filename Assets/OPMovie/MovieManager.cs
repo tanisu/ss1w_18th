@@ -12,6 +12,7 @@ public class MovieManager : MonoBehaviour
     public Image endPanel00;
     public Text startText;
     public Text creditText;
+    public Text tittleText;
     public AudioSource audioSource;
     public Fade fade;
 
@@ -25,7 +26,7 @@ public class MovieManager : MonoBehaviour
     IEnumerator StartMovie()
     {
         yield return new WaitForSeconds(3);
-        audioSource.Play();
+        SoundManager.instance.PlayBGM(SoundManager.BGM.Opening);
         yield return new WaitForSeconds(3);
         startText.text = ("タニス谷山\nasahi\nくわぽん\npresents");
         yield return new WaitForSeconds(3);
@@ -59,6 +60,8 @@ public class MovieManager : MonoBehaviour
         panelParent.transform.localPosition = new Vector2(0, 600);
         endPanel00.DOFade(1, 10f);
         yield return new WaitForSeconds(11);
+        SoundManager.instance.StopBGM();
+        tittleText.text = ("夢のマイホーム");
         
 
 
@@ -94,6 +97,7 @@ public class MovieManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            SoundManager.instance.PlaySE(SoundManager.SE.Click);
             fade.FadeIn(1f, () => SceneManager.LoadScene("Office"));
             
         }
