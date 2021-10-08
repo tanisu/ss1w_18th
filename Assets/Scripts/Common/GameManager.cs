@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
                 {
                     string m = mess_2[Random.Range(0, mess_2.Length )];
                     mess.text = m;
+
                 }
                 
                 StartCoroutine("_startFade");
@@ -81,14 +82,18 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator _doFade()
     {
-        fade.FadeIn(1f, () => { 
-            if(SceneManager.GetActiveScene().name == "Office")
-            {
-                loopManager.Loop();
-            }
-            else if(SceneManager.GetActiveScene().name == "Town")
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        fade.FadeIn(1f, () => {
+        if (SceneManager.GetActiveScene().name == "Office")
+        {
+            loopManager.Loop();
+        }
+        else if (SceneManager.GetActiveScene().name == "Town")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (CheckPointManager.I.restartPos.x != 0)
+                {
+                    CheckPointManager.I.RestartPos();
+                }
             }
             
         });
