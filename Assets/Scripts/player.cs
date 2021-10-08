@@ -28,10 +28,7 @@ public class player : MonoBehaviour
 
     private void Start()
     {
-        //if(CheckPointManager.I.restartPos.x != 0)
-        //{
-        //    transform.position =  CheckPointManager.I.restartPos;
-        //}
+
         rb2d = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         rb2d.bodyType = RigidbodyType2D.Static;
@@ -92,11 +89,6 @@ public class player : MonoBehaviour
             isRunning = true;
         }
 
-        //if (context.performed)
-        //{
-            
-        //    StartCoroutine(_dashSound());
-        //}
 
         
         if(context.canceled)
