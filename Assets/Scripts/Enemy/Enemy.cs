@@ -89,8 +89,12 @@ public class Enemy : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position,target.transform.position) < rangeToChase)
                 {
-                    
+                    sp.color = color;
                     isChaseing = true;
+                }
+                else
+                {
+                    SetBaseColor();
                 }
             }
         }

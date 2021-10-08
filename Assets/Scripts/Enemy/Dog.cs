@@ -26,4 +26,13 @@ public class Dog : MonoBehaviour
             transform.position.z
         );
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SoundManager.instance.PlaySE(SoundManager.SE.Screaming);
+            GameManager.I.IsCatch();
+        }
+    }
 }
