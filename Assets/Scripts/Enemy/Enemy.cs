@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private float waitCounter,moveCounter;
     private Vector2 moveDir;
  
-    private bool isChaseing,setStart;
+    private bool isChaseing,setStart,isScream;
     private bool canMove = true;
   
     
@@ -89,11 +89,13 @@ public class Enemy : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position,target.transform.position) < rangeToChase)
                 {
+                    
                     sp.color = color;
                     isChaseing = true;
                 }
                 else
                 {
+                    isScream = false;
                     SetBaseColor();
                 }
             }
@@ -112,6 +114,10 @@ public class Enemy : MonoBehaviour
             }
             else
             {
+                if (!isScream) {
+                    SoundManager.instance.PlaySE(SoundManager.SE.EnemyScreaming);
+                    isScream = true;
+                }
                 sp.color = color;
                 moveDir = target.transform.position - transform.position;
                 moveDir.Normalize();

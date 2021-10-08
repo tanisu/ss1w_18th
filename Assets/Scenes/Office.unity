@@ -195,6 +195,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1464239047}
     - target: {fileID: 378894426322469110, guid: 86c9a78841c5d8f44a65c1bbaf7a70cb, type: 3}
+      propertyPath: chase
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 378894426322469110, guid: 86c9a78841c5d8f44a65c1bbaf7a70cb, type: 3}
       propertyPath: rangeToChase
       value: 6
       objectReference: {fileID: 0}
@@ -12663,7 +12667,7 @@ MonoBehaviour:
   speed: 3
   dashSpeed: 5
   limitTime: 5
-  restTime: 1
+  restTime: 3
   zzz: {fileID: 1341041635}
   ase: {fileID: 218279249}
 --- !u!212 &1191953830
@@ -26640,6 +26644,10 @@ PrefabInstance:
       propertyPath: area
       value: 
       objectReference: {fileID: 1464239047}
+    - target: {fileID: 378894426322469110, guid: 86c9a78841c5d8f44a65c1bbaf7a70cb, type: 3}
+      propertyPath: chase
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86c9a78841c5d8f44a65c1bbaf7a70cb, type: 3}
 --- !u!1001 &687035529961496009
