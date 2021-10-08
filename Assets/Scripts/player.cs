@@ -31,6 +31,7 @@ public class player : MonoBehaviour
         if(CheckPointManager.I.restartPos.x != 0)
         {
             transform.position =  CheckPointManager.I.restartPos;
+            CheckPointManager.I.RestartPos();
         }
         rb2d = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
