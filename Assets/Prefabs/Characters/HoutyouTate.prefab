@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7462894847949770303
+--- !u!1 &1845419325708304522
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7462894847949770289}
-  - component: {fileID: 7462894847949770302}
-  - component: {fileID: 8374796789843852501}
-  - component: {fileID: 1614014024292443011}
+  - component: {fileID: 1845419325708304516}
+  - component: {fileID: 1845419325708304523}
+  - component: {fileID: 735486437409354336}
+  - component: {fileID: 9083118659462776820}
   m_Layer: 0
-  m_Name: Houtyou
+  m_Name: HoutyouTate
   m_TagString: Houtyou
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7462894847949770289
+--- !u!4 &1845419325708304516
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7462894847949770303}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1845419325708304522}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7462894847949770302
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!212 &1845419325708304523
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7462894847949770303}
+  m_GameObject: {fileID: 1845419325708304522}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,13 +84,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8374796789843852501
+--- !u!61 &735486437409354336
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7462894847949770303}
+  m_GameObject: {fileID: 1845419325708304522}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -110,16 +110,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5568819, y: 0.13850892}
   m_EdgeRadius: 0
---- !u!114 &1614014024292443011
+--- !u!114 &9083118659462776820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7462894847949770303}
+  m_GameObject: {fileID: 1845419325708304522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15351a4e76717b4886dfe7371ad2453, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cbd2ba1464daba43b3279743650a420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10

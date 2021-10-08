@@ -12,7 +12,7 @@ public class Ogiityan : MonoBehaviour
     [SerializeField] bool chase,collect;
     [SerializeField] float chaseSpeed, rangeToChase;
     [SerializeField] Vector2 startPos,nextPos;
-    [SerializeField] GameObject nextConfiner,houtyouGenerator;
+    [SerializeField] GameObject nextConfiner;
     [SerializeField] GameObject cam;
 
     private float waitCounter, moveCounter;
@@ -170,7 +170,7 @@ public class Ogiityan : MonoBehaviour
 
             if (collect)
             {
-                houtyouGenerator.SetActive(false);
+                
                 SoundManager.instance.PlaySE(SoundManager.SE.Transition);
                 collision.gameObject.transform.position = nextPos;
                 cam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = nextConfiner.GetComponent<Collider2D>();
