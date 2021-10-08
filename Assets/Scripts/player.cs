@@ -28,6 +28,10 @@ public class player : MonoBehaviour
 
     private void Start()
     {
+        if(CheckPointManager.I.restartPos.x != 0)
+        {
+            transform.position =  CheckPointManager.I.restartPos;
+        }
         rb2d = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         rb2d.bodyType = RigidbodyType2D.Static;
@@ -35,6 +39,8 @@ public class player : MonoBehaviour
 
     public void RepeatDream()
     {
+
+        
         zzz.SetActive(true);
         transform.localScale = new Vector3(1f, 1f, 1f);
         rb2d.bodyType = RigidbodyType2D.Static;
