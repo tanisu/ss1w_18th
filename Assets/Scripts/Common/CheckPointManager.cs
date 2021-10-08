@@ -54,4 +54,9 @@ public class CheckPointManager : MonoBehaviour
         cam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = currentConfiner.GetComponent<Collider2D>();
         
     }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
 }

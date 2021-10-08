@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] LoopManager loopManager;
     [SerializeField] GameObject messageText;
     private Text mess;
-    private string[] mess_2 = new string[] { "あれ、外でねちゃったのか","酒、呑みすぎたかな？","ママ、ママはどこ！え、夢？" };
+    private string[] mess_2 = new string[] { "あれ、外でねちゃったのか","酒、呑みすぎたかな？","え、夢？","3LDK,4LDK...","ペットも飼うんだ...","庭でBBQしたい...","モデルルームいかなきゃ...","見積もりもってこい！","ローンなんてへっちゃら..." };
     private Fade fade;
     private bool hasMoney;
 
@@ -105,6 +105,11 @@ public class GameManager : MonoBehaviour
 
     public void StageClear(string nextSecne)
     {
+        if(nextSecne == "Ending")
+        {
+            SoundManager.instance.StopBGM();
+            CheckPointManager.I.DestroyMe();
+        }
         fade.FadeIn(1f, () => SceneManager.LoadScene(nextSecne));
     }
 
