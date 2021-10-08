@@ -10,7 +10,7 @@ public class CheckPointManager : MonoBehaviour
     public Vector3 restartPos;
     public string currentConfinerName;
     private GameObject cam,currentConfiner;
-    
+    private Transform playerTf;
     
     
 
@@ -47,7 +47,9 @@ public class CheckPointManager : MonoBehaviour
 
     public void RestartPos()
     {
+        playerTf = GameObject.FindWithTag("Player").transform;
         cam = GameObject.FindWithTag("vcam");
+        playerTf.position = restartPos;
         currentConfiner = GameObject.Find(currentConfinerName);
         cam.GetComponent<CinemachineConfiner>().m_BoundingShape2D = currentConfiner.GetComponent<Collider2D>();
         
