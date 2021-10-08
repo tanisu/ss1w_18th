@@ -46,6 +46,8 @@ public class SoundManager : MonoBehaviour
         DogBite,//8ワンちゃんの鳴き声
         RunSingle,//9ダッシュ単音
         RunContinue,//10ダッシュ連続音
+        EnemyScreaming,//11敵が追いかけてくる時の声
+        Tired,//12ダッシュ疲れの息切れ
 
     }
 
