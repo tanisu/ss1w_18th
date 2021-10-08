@@ -18,7 +18,7 @@ public class player : MonoBehaviour
 
     PlayerState playerState = PlayerState.SLEEP;
 
-    private bool isRunning ,isTired;//何も書いてないとfalse
+    private bool isRunning ,isTired,isTiredSE;//何も書いてないとfalse
         
     private float totalTime;
     private int seconds;
@@ -28,10 +28,10 @@ public class player : MonoBehaviour
 
     private void Start()
     {
-        if(CheckPointManager.I.restartPos.x != 0)
-        {
-            transform.position =  CheckPointManager.I.restartPos;
-        }
+        //if(CheckPointManager.I.restartPos.x != 0)
+        //{
+        //    transform.position =  CheckPointManager.I.restartPos;
+        //}
         rb2d = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
         rb2d.bodyType = RigidbodyType2D.Static;
@@ -134,6 +134,12 @@ public class player : MonoBehaviour
         }
         if (isTired)
         {
+            if (!isTiredSE)
+            {
+                SoundManager.instance.PlaySE(SoundManager.SE.Tired);
+                isTiredSE = true;
+            }
+            
             _stopCount();
         }
         
@@ -142,6 +148,7 @@ public class player : MonoBehaviour
 
     private void _stopCount()
     {
+        
         ase.SetActive(false);
         sp.color = Color.cyan;
         totalTime += Time.deltaTime;
@@ -155,6 +162,7 @@ public class player : MonoBehaviour
             move = Vector2.zero;
             totalTime = 0;
             isTired = false;
+            isTiredSE = false;
         }
     }
 
